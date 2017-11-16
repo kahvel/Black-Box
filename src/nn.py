@@ -15,7 +15,7 @@ from keras.callbacks import TensorBoard
 # print(pydot.find_graphviz())
 model = Sequential()
 
-model.add(Dense(12, input_dim=12))
+model.add(Dense(12, input_dim=13))
 model.add(Activation("tanh"))
 model.add(Dense(10))
 model.add(Activation("tanh"))
@@ -42,12 +42,14 @@ print("Compiled model")
 
 
 def f(x):
-    y = [0,0,1,1,0,1,None,None,None,None,None,None]
-    return int(all(map(lambda a: ((a[0] == a[1]) if a[1] is not None else True), zip(x, y))))
+    return sum(x) % 2
+    # y = [0,0,1,1,0,1,None,None,None,None,None,None]
+    # return int(all(map(lambda a: ((a[0] == a[1]) if a[1] is not None else True), zip(x, y))))
 
 
-x_train = np.array([np.random.random_integers(0, 1, 12) for _ in range(1000)])
+x_train = np.array([np.random.random_integers(0, 1, 12) for _ in range(3000)])
 y_train = np.array(list(map(f, x_train)))
+x_train = np.column_stack((x_train, y_train))
 
 print("Size of x_train: ", x_train.shape)
 print("Size of y_train: ", y_train.shape)
@@ -61,13 +63,14 @@ print(y_train)
 data_generator = itertools.product([0, 1], repeat=12)
 all_data = np.array(list(data_generator))
 all_values = np.array(list(map(f, all_data)))
+all_data = np.column_stack((all_data, all_values))
 print(all_data)
 print(all_values)
 print(all_data.shape)
 print(all_values.shape)
 
 print("Started training", datetime.datetime.now())
-model.fit(x_train, y_train, epochs=5000, batch_size=100, validation_data=(all_data, all_values), callbacks=[
+model.fit(x_train, y_train, epochs=5000, batch_size=100, validation_data=(all_data, all_values), verbose=0, callbacks=[
     # callback.MyCallback(histogram_freq=1, batch_size=4096, write_graph=False, embeddings_freq=0),
     callback2.MyCallback(f, all_data, 500)
 ])

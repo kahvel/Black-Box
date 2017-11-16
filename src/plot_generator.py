@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 for j in range(10):
-    data = pd.ExcelFile("test2_mi_" + str(j*500) + ".xlsx")
+    data = pd.ExcelFile("test5_mi_" + str(j*500) + ".xlsx")
     plt.subplot(5, 2, j + 1)
     plt.xlim((0, 12))
     plt.ylim((0, 1))
