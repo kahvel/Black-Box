@@ -6,8 +6,9 @@ import itertools
 
 
 def f(x):
-    y = [0,0,1,None,None,None,None,None,None,None,None,None]
+    y = [0,0,1,1,0,1,None,None,None,None,None,None]
     return int(all(map(lambda a: ((a[0] == a[1]) if a[1] is not None else True), zip(x, y))))
+
 
 
 data_generator = itertools.product([0, 1], repeat=12)
@@ -34,38 +35,40 @@ def discretize(column):
                 break
     return tuple(result)
 
-for j in range(1):
-    data = pd.ExcelFile("test" + str(9000) + ".xlsx")
-    for sheetname in data.sheet_names:
+
+for j in range(10):
+    data = pd.ExcelFile("test2_" + str(j*500) + ".xlsx")
+    middd = pd.DataFrame(columns=["x", "y"])
+    midd = pd.DataFrame(columns=["x", "y"])
+    micd = pd.DataFrame(columns=["x", "y"])
+    mi = pd.DataFrame(columns=["x", "y"])
+    for i, sheetname in enumerate(data.sheet_names):
         data_frame = np.array(data.parse(sheetname=sheetname))
         print("Sheet: " + str(sheetname))
         print(data_frame.shape)
         # print(lnc.MI.mi_Kraskov(np.column_stack([data_frame, all_data])))
         # print(lnc.MI.mi_LNC(np.column_stack([data_frame, all_data])))
-        # print(
-        #     entropy_estimators.mi(data_frame, all_data, k=k),
-        #     entropy_estimators.mi(data_frame, all_values, k=k)
-        # )
-        # print(
-        #     entropy_estimators.micd(data_frame.tolist()*(k_cd+1), all_data.tolist()*(k_cd+1), k=k_cd),
-        #     entropy_estimators.micd(data_frame.tolist()*(k_cd+1), all_values.tolist()*(k_cd+1), k=k_cd)
-        # )
-        # print(
-        #     entropy_estimators.midd(totuple(data_frame), totuple(all_data)),
-        #     entropy_estimators.midd(totuple(data_frame), totuple(all_values))
-        # )
-
+        mi.loc[i, "x"] = entropy_estimators.mi(data_frame, all_data, k=k)
+        mi.loc[i, "y"] = entropy_estimators.mi(data_frame, all_values, k=k)
+        micd.loc[i, "x"] = entropy_estimators.micd(data_frame.tolist()*(k_cd+1), all_data.tolist()*(k_cd+1), k=k_cd)
+        micd.loc[i, "y"] = entropy_estimators.micd(data_frame.tolist()*(k_cd+1), all_values.tolist()*(k_cd+1), k=k_cd)
+        midd.loc[i, "x"] = entropy_estimators.midd(totuple(data_frame), totuple(all_data))
+        midd.loc[i, "y"] = entropy_estimators.midd(totuple(data_frame), totuple(all_values))
         # discretized_data = tuple(np.histogram(col, bins) for col in data_frame.T)
         discretized_data = totuple(np.transpose(tuple(discretize(col) for col in data_frame.T)))
         # print(data_frame)
         # print(np.array(discretized_data).shape)
         # print((tuple(np.histogram(data_frame.T[0], np.linspace(-1, 1, 33)))))
         # print((tuple(np.histogram(np.array(discretized_data).T[0], np.linspace(-1, 1, 33)))))
-        print(
-            entropy_estimators.midd(discretized_data, totuple(all_data)),
-            entropy_estimators.midd(discretized_data, totuple(all_values))
-        )
+        middd.loc[i, "x"] = entropy_estimators.midd(discretized_data, totuple(all_data))
+        middd.loc[i, "y"] = entropy_estimators.midd(discretized_data, totuple(all_values))
         # print(str(entropy_estimators.mi(data_frame, dummy_data)))
 
         # print("Discrete: " + str(entropy_estimators.midd(data_frame, all_data)))
         # print("Mixed: " + str(entropy_estimators.micd(data_frame, all_data)))
+    writer = pd.ExcelWriter("test2_mi_" + str(j*500) + ".xlsx", engine="xlsxwriter")
+    middd.to_excel(writer, sheet_name="middd")
+    midd.to_excel(writer, sheet_name="midd")
+    micd.to_excel(writer, sheet_name="micd")
+    mi.to_excel(writer, sheet_name="mi")
+    writer.close()

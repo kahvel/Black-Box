@@ -42,7 +42,7 @@ print("Compiled model")
 
 
 def f(x):
-    y = [0,0,1,1,None,None,None,None,None,None,None,None]
+    y = [0,0,1,1,0,1,None,None,None,None,None,None]
     return int(all(map(lambda a: ((a[0] == a[1]) if a[1] is not None else True), zip(x, y))))
 
 
@@ -67,9 +67,9 @@ print(all_data.shape)
 print(all_values.shape)
 
 print("Started training", datetime.datetime.now())
-model.fit(x_train, y_train, epochs=10000, batch_size=100, validation_data=(all_data, all_values), callbacks=[
+model.fit(x_train, y_train, epochs=5000, batch_size=100, validation_data=(all_data, all_values), callbacks=[
     # callback.MyCallback(histogram_freq=1, batch_size=4096, write_graph=False, embeddings_freq=0),
-    callback2.MyCallback(f, all_data, 1000)
+    callback2.MyCallback(f, all_data, 500)
 ])
 # model.fit(x_train, y_train, epochs=1, batch_size=100, validation_data=(all_data, all_values), callbacks=[TensorBoard(histogram_freq=1, batch_size=4096, write_graph=False, embeddings_freq=0)])
 print("Finished training", datetime.datetime.now())
