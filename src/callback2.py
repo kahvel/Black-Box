@@ -7,13 +7,14 @@ import pandas as pd
 
 
 class MyCallback(Callback):
-    def __init__(self, function, all_data, frequency):
+    def __init__(self, function, all_data, frequency, directory):
         super(Callback, self).__init__()
         self.data = {}
         self.function = function
         self.frequency = frequency
         self.all_data = all_data
         self.widths = [12, 10, 7, 5, 4, 3, 2, 1]
+        self.directory = directory
         # self.column_names = [["L" + str(i).rjust(2, "0") + "N" + str(j).rjust(2, "0") for j in range(self.widths[i])] for i in range(len(self.widths))]
         # self.flat_column_names = [item for sublist in self.column_names for item in sublist]
 
@@ -42,7 +43,7 @@ class MyCallback(Callback):
 
     def on_train_end(self, logs=None):
         for epoch in self.data:
-            writer = pd.ExcelWriter("test5_" + str(epoch) + ".xlsx", engine="xlsxwriter")
+            writer = pd.ExcelWriter(self.directory + "/test_" + str(epoch) + ".xlsx", engine="xlsxwriter")
             for layer in self.data[epoch]:
                 self.data[epoch][layer].to_excel(writer, sheet_name=str(layer))
             writer.close()

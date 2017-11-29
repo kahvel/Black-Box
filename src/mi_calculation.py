@@ -22,8 +22,10 @@ print(dummy_data)
 k = 3
 k_cd = 1
 
+
 def totuple(list_of_lists):
     return tuple(tuple(list) for list in list_of_lists)
+
 
 def discretize(column):
     bins = np.linspace(-1, 1, 33)
@@ -36,8 +38,10 @@ def discretize(column):
     return tuple(result)
 
 
+directory = "./test8"
+frequency = 500
 for j in range(10):
-    data = pd.ExcelFile("test5_" + str(j*500) + ".xlsx")
+    data = pd.ExcelFile(directory + "/test_" + str(j*frequency) + ".xlsx")
     middd = pd.DataFrame(columns=["x", "y"])
     midd = pd.DataFrame(columns=["x", "y"])
     micd = pd.DataFrame(columns=["x", "y"])
@@ -66,7 +70,7 @@ for j in range(10):
 
         # print("Discrete: " + str(entropy_estimators.midd(data_frame, all_data)))
         # print("Mixed: " + str(entropy_estimators.micd(data_frame, all_data)))
-    writer = pd.ExcelWriter("test5_mi_" + str(j*500) + ".xlsx", engine="xlsxwriter")
+    writer = pd.ExcelWriter(directory + "/test_mi_" + str(j*frequency) + ".xlsx", engine="xlsxwriter")
     middd.to_excel(writer, sheet_name="middd")
     # midd.to_excel(writer, sheet_name="midd")
     # micd.to_excel(writer, sheet_name="micd")
