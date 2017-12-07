@@ -2,14 +2,24 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-directory = "./test8"
+directory = "./test1_12"
 frequency = 500
 mi_estimation_method = "middd"
+bins = "1_33"
+# bins = "pi/2_333"
+
+if bins == "1_33":
+    file_name = "/test_mi_"
+elif bins == "pi/2_333":
+    file_name = "/test_mi_new_bins_"
+else:
+    raise Exception
+
 for j in range(10):
-    data = pd.ExcelFile(directory + "/test_mi_" + str(j*frequency) + ".xlsx")
+    data = pd.ExcelFile(directory + file_name + str(j*frequency) + ".xlsx")
     plt.subplot(5, 2, j + 1)
     plt.xlim((0, 12))
-    plt.ylim((0, 1))
+    plt.ylim((-0.1, 1.1))
     if j < 2 or True:
         plt.title("Epoch " + str(j*frequency))
     if j % 2 == 0 or True:
@@ -38,5 +48,9 @@ plt.show()
 # Two functions (4) or one function and calculate partial stuff yourself
 # Noisy copy (5)
 
+# information decomposition (4)
+# Divide 12 inputs to 2 xors, that always have the same bit (fewer  inputs).
+
 # analog to digital, relu.
 
+# check weights when learning XOR. Prove something.

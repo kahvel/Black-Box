@@ -1,0 +1,114 @@
+test1_1 (learned)
+
+all 2^12 inputs
+5000 epochs
+no true label input
+batch size 100
+weight decay 0.000001
+
+test1_2 
+
+all 2^12 inputs
+5000 epochs
+true label input
+batch size 100
+weight decay 0.000001
+
+test1_3 (did not learn)
+
+all 2^12 inputs
+15000 epochs
+no true label input
+batch size 100
+weight decay 0.000001
+
+test1_4
+
+all 2^12 inputs
+15000 epochs
+true label input
+batch size 100
+weight decay 0.000001
+
+test1_5 (did not learn)
+
+all 2^12 inputs
+5000 epochs
+batch size 100
+weight decay 0.000001
+changed last layer activation to tanh
+changed kernel initialisation to orthogonal
+
+test1_6 (did not learn)
+
+all 2^12 inputs
+5000 epochs
+batch size 4096
+weight decay 0.000001
+changed last layer activation to tanh
+changed kernel initialisation to orthogonal
+
+test1_7 (did not learn)
+
+all 2^12 inputs
+5000 epochs
+batch size 4096
+weight decay 0
+changed last layer activation to tanh
+
+test1_8 (did not learn)
+
+all 2^12 inputs
+5000 epochs
+batch size 4096
+weight decay 0
+
+test1_9 (learned)
+
+3000 inputs
+5000 epochs
+No added true label
+batch size 100
+weight decay 0.000001
+
+test1_10 (learned)
+
+3000 inputs
+5000 epochs
+Added true label
+batch size 100
+weight decay 0.000001
+
+
+test1_11
+
+3000 inputs
+5000 epochs
+No added true label
+batch size 100
+weight decay 0.00001
+
+test1_12 
+
+3000 inputs
+5000 epochs
+Added true label
+batch size 100
+weight decay 0.00001
+
+test1_13
+
+3000 inputs
+5000 epochs
+No added true label
+batch size 100
+weight decay 0.001
+
+test1_14
+
+3000 inputs
+5000 epochs
+Added true label
+batch size 100
+weight decay 0.001
+

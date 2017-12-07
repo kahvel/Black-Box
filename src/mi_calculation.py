@@ -27,8 +27,7 @@ def totuple(list_of_lists):
     return tuple(tuple(list) for list in list_of_lists)
 
 
-def discretize(column):
-    bins = np.linspace(-1, 1, 33)
+def discretize(column, bins):
     result = []
     for x in column:
         for i, upper_bound in enumerate(bins[1:]):
@@ -38,8 +37,21 @@ def discretize(column):
     return tuple(result)
 
 
-directory = "./test8"
+directory = "./test1_12"
 frequency = 500
+bins = "1_33"
+# bins = "pi/2_333"
+
+if bins == "1_33":
+    bins = np.linspace(-1, 1, 33)
+    file_name = "/test_mi_"
+elif bins == "pi/2_333":
+    bins = np.linspace(-np.pi / 2, np.pi / 2, 333)
+    file_name = "/test_mi_new_bins_"
+else:
+    raise Exception
+
+
 for j in range(10):
     data = pd.ExcelFile(directory + "/test_" + str(j*frequency) + ".xlsx")
     middd = pd.DataFrame(columns=["x", "y"])
@@ -59,7 +71,7 @@ for j in range(10):
         # midd.loc[i, "x"] = entropy_estimators.midd(totuple(data_frame), totuple(all_data))
         # midd.loc[i, "y"] = entropy_estimators.midd(totuple(data_frame), totuple(all_values))
         # discretized_data = tuple(np.histogram(col, bins) for col in data_frame.T)
-        discretized_data = totuple(np.transpose(tuple(discretize(col) for col in data_frame.T)))
+        discretized_data = totuple(np.transpose(tuple(discretize(col, bins) for col in data_frame.T)))
         # print(data_frame)
         # print(np.array(discretized_data).shape)
         # print((tuple(np.histogram(data_frame.T[0], np.linspace(-1, 1, 33)))))
@@ -70,7 +82,7 @@ for j in range(10):
 
         # print("Discrete: " + str(entropy_estimators.midd(data_frame, all_data)))
         # print("Mixed: " + str(entropy_estimators.micd(data_frame, all_data)))
-    writer = pd.ExcelWriter(directory + "/test_mi_" + str(j*frequency) + ".xlsx", engine="xlsxwriter")
+    writer = pd.ExcelWriter(directory + file_name + str(j*frequency) + ".xlsx", engine="xlsxwriter")
     middd.to_excel(writer, sheet_name="middd")
     # midd.to_excel(writer, sheet_name="midd")
     # micd.to_excel(writer, sheet_name="micd")

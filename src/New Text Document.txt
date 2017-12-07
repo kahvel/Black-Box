@@ -1,0 +1,142 @@
+test 3?, 5, 6, 7
+
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+Added label as input
+
+test 3, 5, 6
+
+No regularisation
+
+test 7
+
+regularisation with 0.01 decay
+all layers
+
+test 3, 5, 7
+
+5000 epochs
+
+test 6
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+Added label as input
+50000 epochs
+bins = np.linspace(-1, 1, 33)
+plot - first layers stay right (more left though than without added label as input)
+
+test 7
+like 6 but fewer epochs and regularisation
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+Added label as input
+5000 epochs
+added regularisation l2 0.01
+bins = np.linspace(-1, 1, 33)
+plot - first layers move left
+
+test 8
+like 7 but without added label as input
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+5000 epochs
+added regularisation l2 0.01
+
+test 9
+like 8 but smaller regularisation
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+5000 epochs
+added regularisation l2 0.001
+
+test10
+like 9 but no regularisation
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+5000 epochs
+added regularisation l2 0.0
+
+test 11
+like 8 but smaller regularisation
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+5000 epochs
+added regularisation l2 0.0001
+
+test 12
+like 11 but more epochs
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+10000 epochs
+added regularisation l2 0.0001
+
+test 13
+like 12 but more epochs
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+50000 epochs
+added regularisation l2 0.0001
+
+test 14
+redo test 11
+
+test 15
+like 11 but smaller regularisation
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+5000 epochs
+added regularisation l2 0.00001
+
+
+test 16
+like 11 regularisation 1
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+5000 epochs
+added regularisation l2 1
+
+test 17
+like 16 more epochs
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+20000 epochs
+added regularisation l2 1
+
+test 18
+regularisation only on the first layer
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+5000 epochs
+weight_decay = 0.0
+first_layer_decay = 0.01
+
+test 19
+regularisation only on the first layer
+def f(x):
+    return sum(x) % 2
+batch size 100, validation data all inputs, training data 3000 random samples
+5000 epochs
+weight_decay = 0.0
+first_layer_decay = 0.0001
+
+test 20
+same as 19
+
+test 21
+same as 19 but with added input label
+
+test 22
+4096 inputs
