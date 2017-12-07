@@ -7,10 +7,9 @@ import pandas as pd
 
 
 class MyCallback(Callback):
-    def __init__(self, function, all_data, frequency, directory):
+    def __init__(self, all_data, frequency, directory):
         super(Callback, self).__init__()
         self.data = {}
-        self.function = function
         self.frequency = frequency
         self.all_data = all_data
         self.widths = [12, 10, 7, 5, 4, 3, 2, 1]
