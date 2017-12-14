@@ -1,0 +1,31 @@
+2 XORs
+
+test2_1 (did not learn WRONG CALCULATION)
+
+3000/2 inputs
+5000 epochs
+batch size 100
+weight decay 0
+
+test2_2 (did not learn WRONG CALCULATION)
+
+3000/2 inputs
+5000 epochs
+batch size 100
+weight decay 0.0001
+
+test2_3
+
+All samples as inputs
+5000 epochs
+batch size 100
+weight decay 0
+[[1084]] 4096 0.2646484375 WRONG CALCULATION
+
+test2_4
+
+All samples as inputs
+5000 epochs
+batch size 100
+weight decay 0
+

@@ -3,6 +3,7 @@ import callback, callback2
 import numpy as np
 import itertools
 import datetime
+import random
 
 from keras.models import Sequential
 from keras.layers import Dense, Activation
@@ -20,7 +21,14 @@ weight_decay = 0#0.0001
 first_layer_decay = weight_decay
 kernel_initialisation = "glorot_uniform"
 add_label_input = False
-use_xors_functions = True
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = False
+no_of_samples = 4096
+directory = "./test3_4"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
 
 input_dim = 13 if add_label_input else 12
 model.add(Dense(12, kernel_regularizer=regularizers.l2(first_layer_decay), kernel_initializer=kernel_initialisation, input_dim=input_dim))
@@ -64,15 +72,20 @@ def filtering(x):
     return (sum(x[:6]) % 2) == (sum(x[6:]) % 2)
 
 
-x_train = np.array([np.random.random_integers(0, 1, 12) for _ in range(3000)])
-data_generator = itertools.product([0, 1], repeat=12)
-x_train = np.array(list(data_generator))
-np.random.shuffle(x_train)
+if use_randomly_generated_inputs:
+    x_train = np.array([np.random.random_integers(0, 1, 12) for _ in range(no_of_samples)])
+else:
+    data_generator = itertools.product([0, 1], repeat=12)
+    x_train = np.array(list(data_generator))
+    if sample_from_all_inputs:
+        x_train = np.array([random.choice(x_train) for _ in range(no_of_samples)])
+    else:
+        np.random.shuffle(x_train)
 data_generator = itertools.product([0, 1], repeat=12)
 all_data = np.array(list(data_generator))
 
 
-if use_xors_functions:
+if use_two_xors:
     all_data = np.array(list(filter(filtering, all_data)))
     x_train = np.array(list(filter(filtering, x_train)))
     y_train = np.array(list(map(f1, x_train)))
@@ -95,11 +108,8 @@ print("Size of y_train: ", y_train.shape)
 print(x_train)
 print(y_train)
 
-directory = "./test2_4"
-epochs = 5000
-frequency = epochs/10
 print("Started training", datetime.datetime.now())
-model.fit(x_train, y_train, epochs=epochs, batch_size=100, validation_data=(all_data, all_values), verbose=0, callbacks=[
+model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size, validation_data=(all_data, all_values), verbose=0, callbacks=[
     # callback.MyCallback(histogram_freq=1, batch_size=4096, write_graph=False, embeddings_freq=0),
     callback2.MyCallback(all_data, frequency, directory),
     TensorBoard(log_dir=directory, histogram_freq=frequency, batch_size=4096, write_graph=False)
@@ -110,7 +120,7 @@ print("Finished training", datetime.datetime.now())
 print("Started counting results")
 correct_results = 0
 for sample, value in zip(all_data, all_values):
-    # print(f(sample), model.predict(np.array([sample])))
+    print(value, model.predict(np.array([sample])))
     correct_results += (value == (model.predict(np.array([sample])) >= 0.5))
     # correct_results += (value == (model.predict(np.array([sample])) >= 0))
 print("Finished counting results")

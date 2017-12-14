@@ -1,0 +1,72 @@
+test 3_1
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = True
+use_randomly_generated_inputs = True
+no_of_random_inputs = 4096
+directory = "./test3_1"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test 3_2
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = True
+no_of_random_inputs = 4096
+directory = "./test3_2"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test 3_3
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = True
+no_of_samples = 3000
+directory = "./test3_3"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test 3_4 (Overwritten, but succeeded)
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = True
+no_of_samples = 4096
+directory = "./test3_4"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test 3_4
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = False
+no_of_samples = 4096
+directory = "./test3_4"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100

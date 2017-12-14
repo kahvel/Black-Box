@@ -11,6 +11,10 @@ def f(x):
     # return int(all(map(lambda a: ((a[0] == a[1]) if a[1] is not None else True), zip(x, y))))
 
 
+def f1(x):
+    return sum(x[:6]) % 2
+
+
 data_generator = itertools.product([0, 1], repeat=12)
 all_data = np.array(list(data_generator))
 all_values = np.array(list(map(lambda x: [f(x)], all_data)))
@@ -37,7 +41,7 @@ def discretize(column, bins):
     return tuple(result)
 
 
-directory = "./test2_1"
+directory = "./test3_1"
 frequency = 500
 bins = "1_33"
 # bins = "pi/2_333"

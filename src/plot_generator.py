@@ -2,11 +2,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-directory = "./test2_1"
+directory = "./test3_1"
 frequency = 500
 mi_estimation_method = "middd"
-bins = "1_33"
-# bins = "pi/2_333"
+# bins = "1_33"
+bins = "pi/2_333"
 
 if bins == "1_33":
     file_name = "/test_mi_"
