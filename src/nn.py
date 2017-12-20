@@ -24,11 +24,11 @@ add_label_input = False
 use_two_xors = False
 use_randomly_generated_inputs = False
 sample_from_all_inputs = False
-no_of_samples = 4096
-directory = "./test3_4"
+no_of_samples = 3000
+directory = "./test4_2"
 epochs = 5000
 frequency = epochs/10
-batch_size = 100
+batch_size = 10
 
 input_dim = 13 if add_label_input else 12
 model.add(Dense(12, kernel_regularizer=regularizers.l2(first_layer_decay), kernel_initializer=kernel_initialisation, input_dim=input_dim))
@@ -81,6 +81,9 @@ else:
         x_train = np.array([random.choice(x_train) for _ in range(no_of_samples)])
     else:
         np.random.shuffle(x_train)
+        # x_train = np.row_stack((x_train, [0,0,1,0,1,1,0,0,1,0,1,0]))
+        # x_train = np.delete(x_train, [i for i in range(1996)], axis=0)
+        # print(x_train)
 data_generator = itertools.product([0, 1], repeat=12)
 all_data = np.array(list(data_generator))
 

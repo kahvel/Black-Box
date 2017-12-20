@@ -56,7 +56,7 @@ epochs = 5000
 frequency = epochs/10
 batch_size = 100
 
-test 3_4
+test 3_4 fail
 
 weight_decay = 0#0.0001
 first_layer_decay = weight_decay
@@ -70,3 +70,123 @@ directory = "./test3_4"
 epochs = 5000
 frequency = epochs/10
 batch_size = 100
+
+test3_5 success
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = True
+no_of_samples = 4096
+directory = "./test3_5"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test3_6 fail
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = False
+no_of_samples = 4096
+directory = "./test3_6"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+ 
+test3_7 remove one element - failed
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = False
+no_of_samples = 4096
+directory = "./test3_7"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test3_8 remove 0 vector - failed
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = False
+no_of_samples = 4096
+directory = "./test3_8"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test3_9 remove 1096 samples - failed
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = False
+no_of_samples = 4096
+directory = "./test3_9"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test3_10 np.row_stack((x_train, [0,0,1,0,1,1,0,0,1,0,1,0])) - failed
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = False
+no_of_samples = 4096
+directory = "./test3_10"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test3_11 - succeeded
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = True
+no_of_samples = 3000
+directory = "./test3_11"
+epochs = 5000
+frequency = epochs/10
+batch_size = 100
+
+test3_13
+
+weight_decay = 0#0.0001
+first_layer_decay = weight_decay
+kernel_initialisation = "glorot_uniform"
+add_label_input = False
+use_two_xors = False
+use_randomly_generated_inputs = False
+sample_from_all_inputs = False
+no_of_samples = 3000
+directory = "./test3_13"
+epochs = 5000
+frequency = epochs/10
+batch_size = 1

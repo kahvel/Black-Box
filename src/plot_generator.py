@@ -161,3 +161,10 @@ plt.show()
 #first try with
 
 
+
+
+
+
+
+# Compare gradients
+# Batch size vs
