@@ -41,7 +41,7 @@ def discretize(column, bins):
     return tuple(result)
 
 
-directory = "./test3_1"
+directory = "./test5_1"
 frequency = 500
 bins = "1_33"
 # bins = "pi/2_333"

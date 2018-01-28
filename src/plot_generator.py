@@ -2,11 +2,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-directory = "./test3_1"
+directory = "./test5_1"
 frequency = 500
 mi_estimation_method = "middd"
-# bins = "1_33"
-bins = "pi/2_333"
+bins = "1_33"
+# bins = "pi/2_333"
 
 if bins == "1_33":
     file_name = "/test_mi_"
@@ -168,3 +168,34 @@ plt.show()
 
 # Compare gradients
 # Batch size vs
+
+
+
+
+
+
+
+# Automated theorem checking
+# Dataset of proofs (low level steps)
+# Predicting sequence elements
+
+# Force some weights to be the same (constrained). Translational invariance
+# Scaling invariance similarly
+# Rotation invariance
+
+# neural network translate to finite state automata
+
+# fixed parameter tracing? kernelazation
+# local algorithm - navigating in solution space
+# navigate in problem space while preserving solution
+
+# learn Gaussian elimination. Reinforcement learning, measure of diagonality as reward
+# Actions - can be continuous.
+# Navigate to problems that preserve the solutions
+# 5-coloring?
+
+# input = state, output is quality of different actions.
+# Markov decision process.
+
+
+

@@ -23,12 +23,13 @@ kernel_initialisation = "glorot_uniform"
 add_label_input = False
 use_two_xors = False
 use_randomly_generated_inputs = False
-sample_from_all_inputs = False
+sample_from_all_inputs = True
 no_of_samples = 3000
-directory = "./test4_2"
+directory = "./test5_1"
 epochs = 5000
 frequency = epochs/10
-batch_size = 10
+batch_size = 100
+zero = -1
 
 input_dim = 13 if add_label_input else 12
 model.add(Dense(12, kernel_regularizer=regularizers.l2(first_layer_decay), kernel_initializer=kernel_initialisation, input_dim=input_dim))
@@ -59,7 +60,7 @@ print("Compiled model")
 
 
 def f(x):
-    return sum(x) % 2
+    return sum((xe if xe != -1 else 0) for xe in x) % 2
     # y = [0,0,1,1,0,1,None,None,None,None,None,None]
     # return int(all(map(lambda a: ((a[0] == a[1]) if a[1] is not None else True), zip(x, y))))
 
@@ -75,7 +76,7 @@ def filtering(x):
 if use_randomly_generated_inputs:
     x_train = np.array([np.random.random_integers(0, 1, 12) for _ in range(no_of_samples)])
 else:
-    data_generator = itertools.product([0, 1], repeat=12)
+    data_generator = itertools.product([zero, 1], repeat=12)
     x_train = np.array(list(data_generator))
     if sample_from_all_inputs:
         x_train = np.array([random.choice(x_train) for _ in range(no_of_samples)])
@@ -84,7 +85,7 @@ else:
         # x_train = np.row_stack((x_train, [0,0,1,0,1,1,0,0,1,0,1,0]))
         # x_train = np.delete(x_train, [i for i in range(1996)], axis=0)
         # print(x_train)
-data_generator = itertools.product([0, 1], repeat=12)
+data_generator = itertools.product([zero, 1], repeat=12)
 all_data = np.array(list(data_generator))
 
 
