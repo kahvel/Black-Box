@@ -1,4 +1,4 @@
-from reinforcement import action
+from reinforcement import action, memory
 
 
 class Agent(object):
@@ -7,12 +7,13 @@ class Agent(object):
         self.environment = environment
         self.vision_field_radius = 2
         self.row, self.col = self.find_coordinates(self.symbol, str(environment))
+        self.memory = memory.Memory(4)
         self.actions = [
-            action.MoveUp(self.environment, self),
-            action.MoveDown(self.environment, self),
-            action.MoveLeft(self.environment, self),
-            action.MoveRight(self.environment, self),
-            action.Stay(self.environment, self),
+            action.Action(self.environment, self, -1, 0),
+            action.Action(self.environment, self, 1, 0),
+            action.Action(self.environment, self, 0, -1),
+            action.Action(self.environment, self, 0, 1),
+            action.Action(self.environment, self, 0, 0),
         ]
 
     def find_coordinates(self, symbol, environment_str):
@@ -22,25 +23,32 @@ class Agent(object):
                 return i, location
         raise Exception
 
-    def get_visible_field_coordinates(self):
+    def get_square_coordinates(self, row, col, radius):
         return (
-            self.row - self.vision_field_radius,
-            self.row + self.vision_field_radius + 1,
-            self.col - self.vision_field_radius,
-            self.col + self.vision_field_radius + 1,
+            row - radius,
+            row + radius + 1,
+            col - radius,
+            col + radius + 1,
         )
 
+    def get_visible_field_coordinates(self):
+        return self.get_square_coordinates(self.row, self.col, self.vision_field_radius)
+
+    def perform_action(self, action_id):
+        self.memory.save(self.environment.get_area_list(*self.get_visible_field_coordinates()), self.actions[action_id])
+        self.row, self.col = self.actions[action_id].perform()
+
     def move_up(self):
-        self.row, self.col = self.actions[0].perform()
+        self.perform_action(0)
 
     def move_down(self):
-        self.row, self.col = self.actions[1].perform()
+        self.perform_action(1)
 
     def move_left(self):
-        self.row, self.col = self.actions[2].perform()
+        self.perform_action(2)
 
     def move_right(self):
-        self.row, self.col = self.actions[3].perform()
+        self.perform_action(3)
 
     def move_stay(self):
-        self.row, self.col = self.actions[4].perform()
+        self.perform_action(4)
